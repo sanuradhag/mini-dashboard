@@ -7,4 +7,6 @@ export const ERROR_LOAD_FAILED =
 
 export const EMPTY_NO_RESULTS = 'No results found'
 
+export const SEARCH_DEBOUNCE_MS = 500
+
 export const APP_TITLE = 'Product Dashboard'

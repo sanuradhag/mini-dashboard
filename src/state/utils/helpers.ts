@@ -18,3 +18,35 @@ export function transformProduct(product: Product): EnrichedProduct {
 export function transformProducts(products: Product[]): EnrichedProduct[] {
   return products.map(transformProduct)
 }
+
+export function filterByTitle(
+  products: EnrichedProduct[],
+  query: string,
+): EnrichedProduct[] {
+  const normalizedQuery = query.trim().toLowerCase()
+
+  if (!normalizedQuery) {
+    return products
+  }
+
+  return products.filter((product) =>
+    product.title.toLowerCase().includes(normalizedQuery),
+  )
+}
+
+export function sortProducts(
+  products: EnrichedProduct[],
+  sortField: 'title' | 'price',
+  sortDirection: 'asc' | 'desc',
+): EnrichedProduct[] {
+  const sorted = [...products].sort((a, b) => {
+    const comparison =
+      sortField === 'title'
+        ? a.title.localeCompare(b.title)
+        : a.price - b.price
+
+    return sortDirection === 'asc' ? comparison : -comparison
+  })
+
+  return sorted
+}

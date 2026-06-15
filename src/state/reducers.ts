@@ -1,18 +1,31 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 
-import type { ProductsState } from './utils/types'
+import type { ProductsState, SortDirection, SortField } from './utils/types'
 import { fetchProductsThunk } from './thunks'
 
 const initialState: ProductsState = {
   products: [],
   apiStatus: 'idle',
   apiError: null,
+  searchQuery: '',
+  sortField: 'title',
+  sortDirection: 'asc',
 }
 
 const productsSlice = createSlice({
   name: 'products',
   initialState,
-  reducers: {},
+  reducers: {
+    setSearchQuery: (state, action: PayloadAction<string>) => {
+      state.searchQuery = action.payload
+    },
+    setSortField: (state, action: PayloadAction<SortField>) => {
+      state.sortField = action.payload
+    },
+    setSortDirection: (state, action: PayloadAction<SortDirection>) => {
+      state.sortDirection = action.payload
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProductsThunk.pending, (state) => {
@@ -29,5 +42,8 @@ const productsSlice = createSlice({
       })
   },
 })
+
+export const { setSearchQuery, setSortField, setSortDirection } =
+  productsSlice.actions
 
 export default productsSlice.reducer

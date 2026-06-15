@@ -24,8 +24,15 @@ export type EnrichedProduct = Product & {
 
 export type FetchStatus = 'idle' | 'loading' | 'succeeded' | 'failed'
 
+export type SortField = 'title' | 'price'
+
+export type SortDirection = 'asc' | 'desc'
+
 export type ProductsState = {
   products: EnrichedProduct[]
   apiStatus: FetchStatus
   apiError: string | null
+  searchQuery: string
+  sortField: SortField
+  sortDirection: SortDirection
 }
