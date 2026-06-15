@@ -11,6 +11,7 @@ import { fetchProductsThunk } from "../state/thunks";
 import { ERROR_LOAD_FAILED } from "../utils/constants";
 import ErrorMessage from "./ErrorMessage";
 import LoadingSpinner from "./LoadingSpinner";
+import ProductDetailModal from "./ProductDetailModal";
 import ProductList from "./ProductList";
 import SearchBar from "./SearchBar";
 import SortControls from "./SortControls";
@@ -54,6 +55,7 @@ const ProductsView = () => {
 				<SortControls />
 			</div>
 			<ProductList />
+			<ProductDetailModal />
 		</>
 	);
 };

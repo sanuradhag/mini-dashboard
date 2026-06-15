@@ -10,6 +10,7 @@ const initialState: ProductsState = {
   searchQuery: '',
   sortField: 'title',
   sortDirection: 'asc',
+  selectedProductId: null,
 }
 
 const productsSlice = createSlice({
@@ -24,6 +25,12 @@ const productsSlice = createSlice({
     },
     setSortDirection: (state, action: PayloadAction<SortDirection>) => {
       state.sortDirection = action.payload
+    },
+    selectProduct: (state, action: PayloadAction<number>) => {
+      state.selectedProductId = action.payload
+    },
+    clearSelectedProduct: (state) => {
+      state.selectedProductId = null
     },
   },
   extraReducers: (builder) => {
@@ -43,7 +50,12 @@ const productsSlice = createSlice({
   },
 })
 
-export const { setSearchQuery, setSortField, setSortDirection } =
-  productsSlice.actions
+export const {
+  setSearchQuery,
+  setSortField,
+  setSortDirection,
+  selectProduct,
+  clearSelectedProduct,
+} = productsSlice.actions
 
 export default productsSlice.reducer

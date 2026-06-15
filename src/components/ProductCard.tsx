@@ -1,4 +1,7 @@
-import type { FC } from "react";
+import type { FC, KeyboardEvent } from "react";
+
+import { selectProduct } from "../state/reducers";
+import { useAppDispatch } from "../state/store";
 import type { EnrichedProduct } from "../state/utils/types";
 
 type ProductCardProps = {
@@ -6,9 +9,30 @@ type ProductCardProps = {
 };
 
 const ProductCard: FC<ProductCardProps> = ({ product }) => {
-	const { image, title, formattedCategory, discountedPrice, price, rating } = product
+	const dispatch = useAppDispatch();
+	const { id, image, title, formattedCategory, discountedPrice, price, rating } =
+		product;
+
+	const handleSelect = () => {
+		dispatch(selectProduct(id));
+	};
+
+	const handleKeyDown = (event: KeyboardEvent) => {
+		if (event.key === "Enter" || event.key === " ") {
+			event.preventDefault();
+			handleSelect();
+		}
+	};
+
 	return (
-		<article className="flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md focus-within:ring-2 focus-within:ring-primary">
+		<article
+			role="button"
+			tabIndex={0}
+			onClick={handleSelect}
+			onKeyDown={handleKeyDown}
+			aria-label={`View details for ${title}`}
+			className="flex cursor-pointer flex-col overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+		>
 			<div className="flex h-48 items-center justify-center bg-white p-4">
 				<img
 					src={image}

@@ -35,4 +35,5 @@ export type ProductsState = {
   searchQuery: string
   sortField: SortField
   sortDirection: SortDirection
+  selectedProductId: number | null
 }

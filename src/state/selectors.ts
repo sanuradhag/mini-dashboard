@@ -35,6 +35,22 @@ export const selectSortDirection = createSelector(
 	({ sortDirection }) => sortDirection,
 );
 
+export const selectSelectedProductId = createSelector(
+	selectProductState,
+	({ selectedProductId }) => selectedProductId,
+);
+
+export const selectSelectedProduct = createSelector(
+	[selectProducts, selectSelectedProductId],
+	(products, selectedProductId) =>
+		products.find((product) => product.id === selectedProductId) ?? null,
+);
+
+export const selectIsProductSelected = createSelector(
+	selectSelectedProductId,
+	(selectedProductId) => selectedProductId !== null,
+);
+
 export const selectIsApiLoading = createSelector(
 	selectProductsApiStatus,
 	(status) => status === "loading",
