@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch, useSelector } from 'react-redux'
-import rootReducer from './reducers'
+import productsReducer from './reducers'
 import type { RootState } from './utils/types'
 
 export const store = configureStore({
   reducer: {
-    app: rootReducer,
+    products: productsReducer,
   },
 })
 

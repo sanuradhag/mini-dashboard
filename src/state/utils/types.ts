@@ -1,5 +1,5 @@
 export type RootState = {
-  app: Record<string, never>
+  products: ProductsState
 }
 
 export type ProductRating = {
